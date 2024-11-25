@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="nr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuer-Amharicsentence</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #a0d8ef, #e0f7fa);
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .sentence-container {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #333;
+            padding: 10px;
+            border: 2px solid #2196F3;
+            border-radius: 10px;
+            background-color: yellow;
+        }
+
+        .question-number {
+            font-size: 1.2em;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        .option-box {
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            background-color: #fff;
+            margin: 10px 0;
+            text-align: center;
+            font-size: 1.2em;
+            color: #555;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .option-box:hover {
+            background-color: #f9f9f9;
+            border-color: #2196F3;
+            transform: translateY(-2px);
+        }
+
+        .option-box.selected {
+            background-color: #e3f2fd;
+            border-color: #2196F3;
+        }
+
+        .option-box.correct {
+            background-color: #dfffd7;
+            border-color: #4CAF50;
+        }
+
+        .option-box.incorrect {
+            background-color: #ffe6e6;
+            border-color: #f44336;
+        }
+
+        .feedback {
+            text-align: center;
+            margin: 20px 0;
+            padding: 10px;
+            border-radius: 5px;
+            display: none;
+        }
+
+        .feedback.correct {
+            background-color: #dfffd7;
+            color: #4CAF50;
+        }
+
+        .feedback.incorrect {
+            background-color: #ffe6e6;
+            color: #f44336;
+        }
+
+        .controls {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 0 10px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+
+        .total-score {
+            text-align: center;
+            font-size: 1.5em;
+            color: #333;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .nav-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .nav-button {
+            display: inline-block;
+            text-decoration: none;
+            color: white;
+            background-color: #2196F3;
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin: 0 5px;
+            transition: background-color 0.3s, transform 0.3s;
+            font-size: 1.1em;
+        }
+
+        .nav-button:hover {
+            background-color: #1976D2;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="nav-container">
+        
+        <a href="index.html" class="nav-button">Back</a>
+        
+    </div>
+	<h5>Play Nuer-Amharic sentence Game </h5>
+    <div class="question-number" id="questionNumber">Thiëc 1</div>
+    <div class="sentence-container" id="sentenceDisplay">Thiëc bɛ bë̱n...</div>
+    <div class="option-container" id="optionContainer"></div>
+    <div class="feedback" id="feedback"></div>
+    <div class="total-score" id="totalScoreDisplay">Kuën diaal: 0 / 20</div>
+    <div class="controls">
+        <button onclick="checkAnswer()" id="checkButton" disabled>guic ɛ </button>
+        <button onclick="nextRound()" id="nextButton" disabled>wer nhiam</button>
+        <button onclick="restartGame()" id="restartButton" style="display: none;">tok lät ɛ nyɔk</button>
+    </div>
+</div>
+
+<script>
+    const sentences = [
+        { am: "ዛሬ እንዴት ነህ?", nr: "mal puony du ɛn walɛ?" },
+        { am: "ወደ ገበያ እየሄድኩ ነው", nr: "ɣän wä kä thuk" },
+        { am: "አየሩ ቆንጆ ነው", nr: "jiɔm gɔa ɛ" },
+        { am: "እባክህ ከእኔ ጋር ና ተቀመጥ", nr: "bë̱r nyuri kɛ ɣä kɛɛl" },
+        { am: "ስምህ ማን ነው?", nr: "cɔal ciöt du ïdi?" },
+        { am: "ወደ ሥራ እሄዳለሁ", nr: "ɣän wä guäth lät" },
+        { am: "ወደ ትምህርት ቤት እሄዳለሁ", nr: "ɣän wä duel gɔärä" },
+        { am: "እየበላሁ ነው (eyebalahu new)", nr: "ɣän miäthä" },
+        { am: "እየጠጣሁ ነው (eyetṭahu new)", nr: "ɣän mäthä" },
+        { am: "አልገባኝም (algebanym)", nr: "känɛ cuop lɔcdä" },
+        { am: "እንዴት ነህ? (Endet neh?)", nr: "Mal puɔ̱nydu?" },
+        { am: "አመሰግናለሁ (Ameseginalehu)", nr: "Ci lɔcdä tɛɛth" },
+        { am: "ስምህ ማን ነው? (Simeh man new?)", nr: "Cɔal ciötdu idi?" },
+        { am: "ከየት ነህ? (Keyet neh?)", nr: "Bi wënith?" },
+        { am: "እወድሃለሁ (Ewedihalehu)", nr: "Nhɔa̱kä ji" },
+        { am: "ርቦኛል (rabonyal)", nr: "Ɣän näk buɔthä" },
+        { am: "በኋላ እገናኝ (Behwala egenany)", nr: "Ban jëk ni wa̱lɛ" },
+        { am: "ደክሞኛል (Dekimonyal)", nr: "Ɣän cä cuuc" }
+    ];
+
+    let currentSentence;
+    let correctTranslation;
+    let selectedOption = null;
+    let score = 0;
+    let totalQuestions = 20;
+    let questionsAsked = 0;
+
+    function loadSentence() {
+        if (questionsAsked >= totalQuestions) {
+            endGame();
+            return;
+        }
+
+        const randomIndex = Math.floor(Math.random() * sentences.length);
+        currentSentence = sentences[randomIndex];
+
+        const langChoice = Math.random() < 0.5;
+        
+        if (langChoice) {
+            displayedSentence = currentSentence.am;
+            correctTranslation = currentSentence.nr;
+            distractors = getDistractors(currentSentence.nr, 'nr');
+        } else {
+            displayedSentence = currentSentence.nr;
+            correctTranslation = currentSentence.am;
+            distractors = getDistractors(currentSentence.am, 'am');
+        }
+
+        const options = [correctTranslation, ...distractors];
+        options.sort(() => Math.random() - 0.5);
+
+        document.getElementById('sentenceDisplay').textContent = displayedSentence;
+        document.getElementById('questionNumber').textContent = `Thiëc ${questionsAsked + 1}`;
+
+        const optionContainer = document.getElementById('optionContainer');
+        optionContainer.innerHTML = '';
+
+        options.forEach(opt => {
+            const optionBox = document.createElement('div');
+            optionBox.className = 'option-box';
+            optionBox.textContent = opt;
+            optionBox.onclick = function() { selectOption(optionBox); };
+            optionContainer.appendChild(optionBox);
+        });
+
+        questionsAsked++;
+    }
+
+    function getDistractors(correctAnswer, lang) {
+        let distractors = [];
+        while (distractors.length < 3) {
+            const randomSentence = sentences[Math.floor(Math.random() * sentences.length)];
+            const distractor = lang === 'am' ? randomSentence.am : randomSentence.nr;
+
+            if (distractor !== correctAnswer && !distractors.includes(distractor)) {
+                distractors.push(distractor);
+            }
+        }
+        return distractors;
+    }
+
+    function selectOption(box) {
+        if (box.classList.contains('correct') || box.classList.contains('incorrect')) return;
+
+        document.querySelectorAll('.option-box').forEach(b => {
+            b.classList.remove('selected');
+        });
+
+        box.classList.add('selected');
+        selectedOption = box;
+        document.getElementById('checkButton').disabled = false;
+    }
+
+    function checkAnswer() {
+        const feedback = document.getElementById('feedback');
+
+        if (selectedOption.textContent === correctTranslation) {
+            selectedOption.classList.add('correct');
+            feedback.textContent = "Cë gɔa!";
+            feedback.className = "feedback correct";
+            score++;
+        } else {
+            selectedOption.classList.add('incorrect');
+            feedback.textContent = `incorrect. correct is: ${correctTranslation}`;
+            feedback.className = "feedback incorrect";
+        }
+
+        feedback.style.display = 'block';
+        document.getElementById('checkButton').disabled = true;
+        document.getElementById('nextButton').disabled = false;
+    }
+
+    function nextRound() {
+        document.querySelectorAll('.option-box').forEach(box => {
+            box.classList.remove('selected', 'correct', 'incorrect');
+        });
+
+        document.getElementById('feedback').style.display = 'none';
+        document.getElementById('checkButton').disabled = true;
+        document.getElementById('nextButton').disabled = true;
+
+        loadSentence();
+    }
+
+    function endGame() {
+        const feedback = document.getElementById('feedback');
+        feedback.textContent = `Lät cɛ thuok!`;
+        feedback.className = "feedback";
+        feedback.style.display = 'block';
+
+        document.getElementById('nextButton').style.display = 'none';
+        document.getElementById('restartButton').style.display = 'inline-block';
+        document.getElementById('totalScoreDisplay').textContent = `Kuën diaal: ${score} / ${totalQuestions}`;
+        document.getElementById('totalScoreDisplay').style.display = 'block';
+    }
+
+    function restartGame() {
+        score = 0;
+        questionsAsked = 0;
+        document.getElementById('totalScoreDisplay').style.display = 'none';
+        loadSentence();
+        document.getElementById('restartButton').style.display = 'none';
+    }
+
+    window.onload = loadSentence;
+</script>
+</body>
+</html>

@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multilingual Dictionary</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+			line-height: 1.6;
+            padding: 20px;
+            background-color: #e9ecef;
+            color: #343a40;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #007bff;
+        }
+        #search {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 2px solid #007bff;
+            border-radius: 4px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        #search:focus {
+            border-color: #0056b3;
+            outline: none;
+        }
+        #dictionary {
+            max-height: 400px;
+            overflow-y: auto;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            background: white;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .entry {
+            margin: 10px 0;
+            padding: 15px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        .entry:hover {
+            background-color: #f8f9fa;
+        }
+        .entry h2 {
+            margin: 0;
+            font-size: 1.5em;
+            color: #007bff;
+        }
+        .entry p {
+            margin: 5px 0;
+            font-size: 14px;
+        }
+        .entry strong {
+            color: #495057;
+        }
+		 .nav-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .nav-button {
+            display: inline-block;
+            text-decoration: none;
+            color: white;
+            background-color: #2196F3;
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin: 0 5px;
+            transition: background-color 0.3s, transform 0.3s;
+            font-size: 1.1em;
+        }
+
+        .nav-button:hover {
+            background-color: #1976D2;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="nav-container">
+        
+        <a href="index.html" class="nav-button">Back</a>
+        
+    </div>
+
+<h1>Nuer, Amharic and English Dictionary</h1>
+<input type="text" id="search" placeholder="Search for a word in English, Amharic, or Nuer...">
+
+<div id="dictionary">
+    <div class="entry" data-en="abandon" data-am="መተው = metewi" data-nr="bäny pi̱ny">
+    <h2>abandon</h2>
+    <p><strong>Amharic:</strong> መተው metewi</p>
+    <p><strong>Nuer:</strong> bäny pi̱ny</p>
+    <p><strong>Definition:</strong> To give up completely (a course of action, a practice, etc.).</p>
+    <p><strong>Example:</strong> They had to abandon their plans due to the bad weather.</p>
+</div>
+
+<div class="entry" data-en="ability" data-am="ችሎታ = chilota" data-nr="lua̱ŋ">
+    <h2>ability</h2>
+    <p><strong>Amharic:</strong> ችሎታ chilota</p>
+    <p><strong>Nuer:</strong> lua̱ŋ</p>
+    <p><strong>Definition:</strong> The capacity to do something, especially the physical, mental, or legal power to perform a task.</p>
+    <p><strong>Example:</strong> Her ability to solve complex problems impressed everyone.</p>
+</div>
+
+<div class="entry" data-en="able" data-am="የሚችል = yemīchili" data-nr="lua̱̱ŋ">
+    <h2>able</h2>
+    <p><strong>Amharic:</strong> የሚችል yemīchili</p>
+    <p><strong>Nuer:</strong> lua̱̱ŋ</p>
+    <p><strong>Definition:</strong> Having the power, skill, means, or opportunity to do something.</p>
+    <p><strong>Example:</strong> She is able to finish the project ahead of schedule.</p>
+</div>
+
+<div class="entry" data-en="abortion" data-am="ፅንስ ማስወረድ = t͟s’inisi masiweredi" data-nr="wuɔ̱c gatdä">
+    <h2>abortion</h2>
+    <p><strong>Amharic:</strong> ፅንስ ማስወረድ t͟s’inisi masiweredi</p>
+    <p><strong>Nuer:</strong> wuɔ̱c gatdä</p>
+    <p><strong>Definition:</strong> The termination of a pregnancy by the removal or expulsion of a fetus or embryo.</p>
+    <p><strong>Example:</strong> The debate over abortion rights continues to be a controversial issue.</p>
+</div>
+
+<div class="entry" data-en="about" data-am="ስለ = sile" data-nr="kɛ kui̱ kä">
+    <h2>about</h2>
+    <p><strong>Amharic:</strong> ስለ sile</p>
+    <p><strong>Nuer:</strong> kɛ kui̱ kä</p>
+    <p><strong>Definition:</strong> On the subject of; concerning.</p>
+    <p><strong>Example:</strong> We talked about our plans for the weekend.</p>
+</div>
+
+<div class="entry" data-en="above" data-am="በላይ = belayi" data-nr="nhia̱l">
+    <h2>above</h2>
+    <p><strong>Amharic:</strong> በላይ belayi</p>
+    <p><strong>Nuer:</strong> nhia̱l</p>
+    <p><strong>Definition:</strong> At a higher level or layer than.</p>
+    <p><strong>Example:</strong> The temperature was above average this summer.</p>
+</div>
+
+<div class="entry" data-en="abroad" data-am="ውጭ አገር = wich’i āgeri" data-nr="ro̱l jurä">
+    <h2>abroad</h2>
+    <p><strong>Amharic:</strong> ውጭ አገር wich’i āgeri</p>
+    <p><strong>Nuer:</strong> ro̱l jurä</p>
+    <p><strong>Definition:</strong> In or to a foreign country or countries.</p>
+    <p><strong>Example:</strong> She studied abroad for a year in France.</p>
+</div>
+
+<div class="entry" data-en="absence" data-am="አለመኖር = ālemenori" data-nr="pa̱k">
+    <h2>absence</h2>
+    <p><strong>Amharic:</strong> አለመኖር ālemenori</p>
+    <p><strong>Nuer:</strong> pa̱k</p>
+    <p><strong>Definition:</strong> The state of being away from a place or person.</p>
+    <p><strong>Example:</strong> His absence from the meeting was noted by everyone.</p>
+</div>
+
+<div class="entry" data-en="absolute" data-am="ፍጹም = fits’umi" data-nr="abthölut">
+    <h2>absolute</h2>
+    <p><strong>Amharic:</strong> ፍጹም fits’umi</p>
+    <p><strong>Nuer:</strong> abthölut</p>
+    <p><strong>Definition:</strong> Not qualified or limited in any way; total.</p>
+    <p><strong>Example:</strong> He has absolute confidence in his team's abilities.</p>
+</div>
+
+<div class="entry" data-en="absolutely" data-am="በፍጹም = befits’umi" data-nr="kɛ thuɔ̱k kɛli̱w">
+    <h2>absolutely</h2>
+    <p><strong>Amharic:</strong> በፍጹም befits’umi</p>
+    <p><strong>Nuer:</strong> kɛ thuɔ̱k kɛli̱w</p>
+    <p><strong>Definition:</strong> With no qualification, restriction, or limitation; totally.</p>
+    <p><strong>Example:</strong> I absolutely agree with your opinion.</p>
+</div>
+
+<div class="entry" data-en="absorb" data-am="መምጠጥ = memit’et’i" data-nr="na̱̱ŋ rɛy">
+    <h2>absorb</h2>
+    <p><strong>Amharic:</strong> መምጠጥ memit’et’i</p>
+    <p><strong>Nuer:</strong> na̱̱ŋ rɛy</p>
+    <p><strong>Definition:</strong> To take in or soak up (energy, or a liquid or other substance) by chemical or physical action.</p>
+    <p><strong>Example:</strong> Plants absorb sunlight to produce energy.</p>
+</div>
+
+<div class="entry" data-en="abuse" data-am="አላግባብ መጠቀም = ālagibabi met’ek’emi" data-nr="kuëth">
+    <h2>abuse</h2>
+    <p><strong>Amharic:</strong> አላግባብ መጠቀም ālagibabi met’ek’emi</p>
+    <p><strong>Nuer:</strong> kuëth</p>
+    <p><strong>Definition:</strong> To use something to bad effect or for a bad purpose; misuse.</p>
+    <p><strong>Example:</strong> It is important to avoid the abuse of power.</p>
+</div>
+
+<div class="entry" data-en="academic" data-am="የትምህርት = yetimihiriti" data-nr="akademik">
+    <h2>academic</h2>
+    <p><strong>Amharic:</strong> የትምህርት yetimihiriti</p>
+    <p><strong>Nuer:</strong> akademik</p>
+    <p><strong>Definition:</strong> Relating to education and scholarship.</p>
+    <p><strong>Example:</strong> She received several academic awards for her achievements.</p>
+</div>
+
+<div class="entry" data-en="accept" data-am="ተቀበል = tek’ebeli" data-nr="nhɔk">
+    <h2>accept</h2>
+    <p><strong>Amharic:</strong> ተቀበል tek’ebeli</p>
+    <p><strong>Nuer:</strong> nhɔk</p>
+    <p><strong>Definition:</strong> To consent to receive or undertake something offered.</p>
+    <p><strong>Example:</strong> He decided to accept the job offer.</p>
+</div>
+
+<div class="entry" data-en="access" data-am="መዳረሻ = medaresha" data-nr="jëk">
+    <h2>access</h2>
+    <p><strong>Amharic:</strong> መዳረሻ medaresha</p>
+    <p><strong>Nuer:</strong> jëk</p>
+    <p><strong>Definition:</strong> The means or opportunity to approach or enter a place.</p>
+    <p><strong>Example:</strong> You need a key to access the building after hours.</p>
+</div>
+
+<div class="entry" data-en="accident" data-am="አደጋ = ādega" data-nr="riɛ̱k">
+    <h2>accident</h2>
+    <p><strong>Amharic:</strong> አደጋ ādega</p>
+    <p><strong>Nuer:</strong> riɛ̱k</p>
+    <p><strong>Definition:</strong> An unfortunate incident that happens unexpectedly and unintentionally.</p>
+    <p><strong>Example:</strong> The accident on the highway caused a major traffic jam.</p>
+</div>
+
+<div class="entry" data-en="accompany" data-am="ማጀብ = majebi" data-nr="guɔ̱ɔ̱r">
+    <h2>accompany</h2>
+    <p><strong>Amharic:</strong> ማጀብ majebi</p>
+    <p><strong>Nuer:</strong> guɔ̱ɔ̱r</p>
+    <p><strong>Definition:</strong> To go somewhere with someone as a companion.</p>
+    <p><strong>Example:</strong> I will accompany you to the doctor’s appointment.</p>
+</div>
+
+<div class="entry" data-en="accomplish" data-am="ማከናወን = makenaweni" data-nr="thuɔ̱k kɛ ma̱l">
+    <h2>accomplish</h2>
+    <p><strong>Amharic:</strong> ማከናወን makenaweni</p>
+    <p><strong>Nuer:</strong> thuɔ̱k kɛ ma̱l</p>
+    <p><strong>Definition:</strong> To achieve or complete successfully.</p>
+    <p><strong>Example:</strong> They worked hard to accomplish their goals.</p>
+</div>
+
+<div class="entry" data-en="according" data-am="መሠረት = mešereti" data-nr="kɛ̱ ta̱a̱ in tëë kɛ">
+    <h2>according</h2>
+    <p><strong>Amharic:</strong> መሠረት mešereti</p>
+    <p><strong>Nuer:</strong> kɛ̱ ta̱a̱ in tëë kɛ</p>
+    <p><strong>Definition:</strong> As stated by or in.</p>
+    <p><strong>Example:</strong> According to the report, the economy is improving.</p>
+</div>
+
+<div class="entry" data-en="account" data-am="መለያ = meleya" data-nr="gua̱̱th tɔwä">
+    <h2>account</h2>
+    <p><strong>Amharic:</strong> መለያ meleya</p>
+    <p><strong>Nuer:</strong> gua̱̱th tɔwä</p>
+    <p><strong>Definition:</strong> A report or description of an event or experience.</p>
+    <p><strong>Example:</strong> She gave a detailed account of her travels.</p>
+</div>
+
+<div class="entry" data-en="accurate" data-am="ትክክለኛ = tikikilenya" data-nr="niɛ gua̱thdɛ">
+    <h2>accurate</h2>
+    <p><strong>Amharic:</strong> ትክክለኛ tikikilenya</p>
+    <p><strong>Nuer:</strong> niɛ gua̱thdɛ</p>
+    <p><strong>Definition:</strong> Free from error, as in accuracy.</p>
+    <p><strong>Example:</strong> The data provided was accurate and reliable.</p>
+</div>
+
+<div class="entry" data-en="accuse" data-am="መክሰስ = mekisesi" data-nr="kuëth">
+    <h2>accuse</h2>
+    <p><strong>Amharic:</strong> መክሰስ mekisesi</p>
+    <p><strong>Nuer:</strong> kuëth</p>
+    <p><strong>Definition:</strong> To claim that someone has done something illegal or wrong.</p>
+    <p><strong>Example:</strong> They were quick to accuse him of dishonesty.</p>
+</div>
+
+<div class="entry" data-en="achieve" data-am="ማሳካት = masakati" data-nr="luäk kɛ jëk">
+    <h2>achieve</h2>
+    <p><strong>Amharic:</strong> ማሳካት masakati</p>
+    <p><strong>Nuer:</strong> luäk kɛ jëk</p>
+    <p><strong>Definition:</strong> To successfully reach a desired objective or result.</p>
+    <p><strong>Example:</strong> She worked hard to achieve her dream of becoming a doctor.</p>
+</div>
+<div class="entry" data-en="achievement" data-am="ስኬት = sikēti" data-nr="mi ca̱ luäŋ kɛ lätni">
+    <h2>achievement</h2>
+    <p><strong>Amharic:</strong> ስኬት sikēti</p>
+    <p><strong>Nuer:</strong> mi ca̱ luäŋ kɛ lätni</p>
+    <p><strong>Definition:</strong> A thing done successfully, typically by effort, courage, or skill.</p>
+    <p><strong>Example:</strong> Graduating from university was her greatest achievement.</p>
+</div>
+
+<div class="entry" data-en="acid" data-am="አሲድ = āsīdi" data-nr="athi̱d">
+    <h2>acid</h2>
+    <p><strong>Amharic:</strong> አሲድ āsīdi</p>
+    <p><strong>Nuer:</strong> athi̱d</p>
+    <p><strong>Definition:</strong> A chemical substance that neutralizes alkalis.</p>
+    <p><strong>Example:</strong> Vinegar contains acetic acid, which gives it a sour taste.</p>
+</div>
+
+<div class="entry" data-en="acknowledge" data-am="እውቅና መስጠት = iwik’ina mesit’eti" data-nr="nhɔk">
+    <h2>acknowledge</h2>
+    <p><strong>Amharic:</strong> እውቅና መስጠት iwik’ina mesit’eti</p>
+    <p><strong>Nuer:</strong> nhɔk</p>
+    <p><strong>Definition:</strong> To accept or admit the existence or truth of something.</p>
+    <p><strong>Example:</strong> She did not acknowledge her mistake during the meeting.</p>
+</div>
+
+<div class="entry" data-en="acquire" data-am="ማግኘት = maginyeti" data-nr="jëk">
+    <h2>acquire</h2>
+    <p><strong>Amharic:</strong> ማግኘት maginyeti</p>
+    <p><strong>Nuer:</strong> jëk</p>
+    <p><strong>Definition:</strong> To obtain or begin to have something.</p>
+    <p><strong>Example:</strong> He hopes to acquire new skills through training.</p>
+</div>
+
+<div class="entry" data-en="across" data-am="በመላ = bemela" data-nr=" wä kui̱y">
+    <h2>across</h2>
+    <p><strong>Amharic:</strong> በመላ bemela</p>
+    <p><strong>Nuer:</strong> wä kui̱y</p>
+    <p><strong>Definition:</strong> From one side to the other side of something.</p>
+    <p><strong>Example:</strong> They walked across the street to get to the park.</p>
+</div>
+
+<div class="entry" data-en="act" data-am="ተግባር = tegibari" data-nr="la̱̱t">
+    <h2>act</h2>
+    <p><strong>Amharic:</strong> ተግባር tegibari</p>
+    <p><strong>Nuer:</strong> la̱̱t</p>
+    <p><strong>Definition:</strong> To take action; do something.</p>
+    <p><strong>Example:</strong> It is important to act quickly in emergencies.</p>
+</div>
+
+<div class="entry" data-en="action" data-am="ድርጊት = dirigīti" data-nr="la̱t mi la̱tkɛ">
+    <h2>action</h2>
+    <p><strong>Amharic:</strong> ድርጊት dirigīti</p>
+    <p><strong>Nuer:</strong> la̱t mi la̱tkɛ</p>
+    <p><strong>Definition:</strong> The fact or process of doing something, typically to achieve an aim.</p>
+    <p><strong>Example:</strong> The charity is taking action to help those in need.</p>
+</div>
+
+<div class="entry" data-en="active" data-am="ንቁ = nik’u" data-nr="mi lärt">
+    <h2>active</h2>
+    <p><strong>Amharic:</strong> ንቁ nik’u</p>
+    <p><strong>Nuer:</strong> mi lärt</p>
+    <p><strong>Definition:</strong> Engaging or ready to engage in physically energetic pursuits.</p>
+    <p><strong>Example:</strong> She leads an active lifestyle by going to the gym regularly.</p>
+</div>
+
+<div class="entry" data-en="activist" data-am="አክቲቪስት = ākitīvīsiti" data-nr="ɛkti̱bi̱thni̱">
+    <h2>activist</h2>
+    <p><strong>Amharic:</strong> አክቲቪስት ākitīvīsiti</p>
+    <p><strong>Nuer:</strong> ɛkti̱bi̱thni̱</p>
+    <p><strong>Definition:</strong> A person who campaigns for some kind of social change.</p>
+    <p><strong>Example:</strong> The activist organized a rally to raise awareness about climate change.</p>
+</div>
+
+<div class="entry" data-en="activity" data-am="እንቅስቃሴ = inik’isik’asē" data-nr="la̱t">
+    <h2>activity</h2>
+    <p><strong>Amharic:</strong> እንቅስቃሴ inik’isik’asē</p>
+    <p><strong>Nuer:</strong> la̱t</p>
+    <p><strong>Definition:</strong> A condition in which things are happening or being done.</p>
+    <p><strong>Example:</strong> The children were engaged in various activities at the summer camp.</p>
+</div>
+
+<div class="entry" data-en="actor" data-am="ተዋናይ = tewanayi" data-nr="ra̱m mi lät duɔr">
+    <h2>actor</h2>
+    <p><strong>Amharic:</strong> ተዋናይ tewanayi</p>
+    <p><strong>Nuer:</strong> ra̱m mi lät duɔr</p>
+    <p><strong>Definition:</strong> A person whose profession is acting on the stage, in movies, or on television.</p>
+    <p><strong>Example:</strong> The actor received an award for his outstanding performance.</p>
+</div>
+
+<div class="entry" data-en="actress" data-am="ተዋናይት = tewanayiti" data-nr="aktrɛth">
+    <h2>actress</h2>
+    <p><strong>Amharic:</strong> ተዋናይት tewanayiti</p>
+    <p><strong>Nuer:</strong> aktrɛth</p>
+    <p><strong>Definition:</strong> A female actor.</p>
+    <p><strong>Example:</strong> The actress starred in several blockbuster films.</p>
+</div>
+
+<div class="entry" data-en="actual" data-am="ትክክለኛ = tikikilenya" data-nr="min mɔ jɛn">
+    <h2>actual</h2>
+    <p><strong>Amharic:</strong> ትክክለኛ tikikilenya</p>
+    <p><strong>Nuer:</strong> min mɔ jɛn</p>
+    <p><strong>Definition:</strong> Existing in fact; real.</p>
+    <p><strong>Example:</strong> The actual cost of the project was much higher than expected.</p>
+</div>
+
+<div class="entry" data-en="actually" data-am="በእውነት = be’iwineti" data-nr="kɛ ta̱a̱ ɛmɔ">
+    <h2>actually</h2>
+    <p><strong>Amharic:</strong> በእውነት be’iwineti</p>
+    <p><strong>Nuer:</strong> kɛ ta̱a̱ ɛmɔ</p>
+    <p><strong>Definition:</strong> As the truth or facts of a situation; really.</p>
+    <p><strong>Example:</strong> I thought she was joking, but she was actually serious.</p>
+</div>
+
+<div class="entry" data-en="ad" data-am="ማስታወቂያ = masitawek’īya" data-nr="ad">
+    <h2>ad</h2>
+    <p><strong>Amharic:</strong> ማስታወቂያ masitawek’īya</p>
+    <p><strong>Nuer:</strong> ad</p>
+    <p><strong>Definition:</strong> A notice or announcement in a public medium promoting a product, service, or event.</p>
+    <p><strong>Example:</strong> I saw an ad for a new restaurant in the newspaper.</p>
+</div>
+
+<div class="entry" data-en="adapt" data-am="መላመድ = melamedi" data-nr="ŋiɛc kä duɔ̱r">
+    <h2>adapt</h2>
+    <p><strong>Amharic:</strong> መላመድ melamedi</p>
+    <p><strong>Nuer:</strong> ŋiɛc kä duɔ̱r</p>
+    <p><strong>Definition:</strong> To adjust or modify to fit a new condition or environment.</p>
+    <p><strong>Example:</strong> Animals adapt to their surroundings for survival.</p>
+</div>
+
+<div class="entry" data-en="add" data-am="ጨምር = ch’emiri" data-nr="ma̱t">
+    <h2>add</h2>
+    <p><strong>Amharic:</strong> ጨምር ch’emiri</p>
+    <p><strong>Nuer:</strong> ma̱t</p>
+    <p><strong>Definition:</strong> To join something to something else so as to increase the size, number, or amount.</p>
+    <p><strong>Example:</strong> Please add your name to the list of attendees.</p>
+</div>
+
+<div class="entry" data-en="addition" data-am="መደመር = medemeri" data-nr="mätni">
+    <h2>addition</h2>
+    <p><strong>Amharic:</strong> መደመር medemeri</p>
+    <p><strong>Nuer:</strong> mätni</p>
+    <p><strong>Definition:</strong> The process of adding something to something else.</p>
+    <p><strong>Example:</strong> In addition to her job, she volunteers at a local charity.</p>
+</div>
+
+<div class="entry" data-en="additional" data-am="ተጨማሪ = tech’emarī" data-nr="mätni">
+    <h2>additional</h2>
+    <p><strong>Amharic:</strong> ተጨማሪ tech’emarī</p>
+    <p><strong>Nuer:</strong> mätni</p>
+    <p><strong>Definition:</strong> Added or extra.</p>
+    <p><strong>Example:</strong> The company provided additional training for its employees.</p>
+</div>
+
+<div class="entry" data-en="address" data-am="አድራሻ = ādirasha" data-nr="gua̱th ciɛŋä">
+    <h2>address</h2>
+    <p><strong>Amharic:</strong> አድራሻ ādirasha</p>
+    <p><strong>Nuer:</strong> gua̱th ciɛŋä</p>
+    <p><strong>Definition:</strong> The particulars of the place where someone lives or an organization is situated.</p>
+    <p><strong>Example:</strong> Please provide your address for the shipping label.</p>
+</div>
+
+<div class="entry" data-en="adequate" data-am="በቂ = bek’ī" data-nr="mi ro̱ŋ">
+    <h2>adequate</h2>
+    <p><strong>Amharic:</strong> በቂ bek’ī</p>
+    <p><strong>Nuer:</strong> mi ro̱ŋ</p>
+    <p><strong>Definition:</strong> Satisfactory or acceptable in quality or quantity.</p>
+    <p><strong>Example:</strong> The supply of food was adequate for the guests.</p>
+</div>
+
+<div class="entry" data-en="adjust" data-am="ማስተካከል = masitekakeli" data-nr="gëkä">
+    <h2>adjust</h2>
+    <p><strong>Amharic:</strong> ማስተካከል masitekakeli</p>
+    <p><strong>Nuer:</strong> gëkä</p>
+    <p><strong>Definition:</strong> To alter or move something slightly in order to achieve the desired fit, appearance, or result.</p>
+    <p><strong>Example:</strong> You may need to adjust the seat for better comfort.</p>
+</div>
+
+<div class="entry" data-en="adjustment" data-am="ማስተካከል = masitekakeli" data-nr="riali̱dɛ i̱kä">
+    <h2>adjustment</h2>
+    <p><strong>Amharic:</strong> ማስተካከል masitekakeli</p>
+    <p><strong>Nuer:</strong> riali̱dɛ i̱kä</p>
+    <p><strong>Definition:</strong> A small alteration or movement made to achieve the desired fit, appearance, or result.</p>
+    <p><strong>Example:</strong> The adjustment of the thermostat improved the temperature in the room.</p>
+</div>
+
+<div class="entry" data-en="administration" data-am="አስተዳደር = āsitedaderi" data-nr="kuär">
+    <h2>administration</h2>
+    <p><strong>Amharic:</strong> አስተዳደር āsitedaderi</p>
+    <p><strong>Nuer:</strong> kuär</p>
+    <p><strong>Definition:</strong> The process or activity of running a business, organization, etc.</p>
+    <p><strong>Example:</strong> The administration of the school has implemented new policies.</p>
+</div>
+
+<div class="entry" data-en="administrator" data-am="አስተዳዳሪ = āsitedadarī" data-nr="admini̱thtrɛtɔr">
+    <h2>administrator</h2>
+    <p><strong>Amharic:</strong> አስተዳዳሪ āsitedadarī</p>
+    <p><strong>Nuer:</strong> admini̱thtrɛtɔr</p>
+    <p><strong>Definition:</strong> A person responsible for running a business, organization, etc.</p>
+    <p><strong>Example:</strong> The administrator oversees the daily operations of the office.</p>
+</div>
+
+<div class="entry" data-en="admire" data-am="አደንቃለሁ = ādenik’alehu" data-nr="bëc">
+    <h2>admire</h2>
+    <p><strong>Amharic:</strong> አደንቃለሁ ādenik’alehu</p>
+    <p><strong>Nuer:</strong> bëc</p>
+    <p><strong>Definition:</strong> To regard with respect or warm approval.</p>
+    <p><strong>Example:</strong> I admire her dedication to her work.</p>
+</div>
+
+<div class="entry" data-en="admission" data-am="መግቢያ = megibīya" data-nr="admɛciɔn">
+    <h2>admission</h2>
+    <p><strong>Amharic:</strong> መግቢያ megibīya</p>
+    <p><strong>Nuer:</strong> admɛciɔn</p>
+    <p><strong>Definition:</strong> The process of entering or being allowed to enter a place, organization, or institution.</p>
+    <p><strong>Example:</strong> Admission to the concert is free for children under 12.</p>
+</div>
+
+<div class="entry" data-en="admit" data-am="መቀበል = mek’ebeli" data-nr="nhɔ̱kɛ">
+    <h2>admit</h2>
+    <p><strong>Amharic:</strong> መቀበል mek’ebeli</p>
+    <p><strong>Nuer:</strong> nhɔ̱kɛ</p>
+    <p><strong>Definition:</strong> To confess to be true or to be the case.</p
+    <div class="entry" data-en="cat" data-am="ድመት = dɨmät" data-nr="nyaw">
+        <h2>cat</h2>
+        <p><strong>Amharic:</strong> ድመት = dɨmät</p>
+        <p><strong>Nuer:</strong> nyaw</p>
+        <p><strong>Definition:</strong> A small domesticated carnivorous mammal.</p>
+    </div>
+    <div class="entry" data-en="cake" data-am="ኬክ = k'ek'ä" data-nr="pat-pat">
+        <h2>cake</h2>
+        <p><strong>Amharic:</strong> ኬክ = k'ek'ä</p>
+        <p><strong>Nuer:</strong> pat-pat</p>
+        <p><strong>Definition:</strong> A sweet baked food made from a mixture of flour, sugar, and other ingredients.</p>
+    </div>
+    <div class="entry" data-en="car" data-am="መኪና = mək'ina" data-nr="thurbiɛl">
+        <h2>car</h2>
+        <p><strong>Amharic:</strong> መኪና = mək'ina</p>
+        <p><strong>Nuer:</strong>thurbiɛl</p>
+        <p><strong>Definition:</strong> A road vehicle, typically with four wheels, powered by an internal combustion engine.</p>
+    </div>
+    <div class="entry" data-en="cup" data-am="ኩባ = kubä" data-nr="liɛr">
+        <h2>cup</h2>
+        <p><strong>Amharic:</strong> ኩባ = kubä</p>
+        <p><strong>Nuer:</strong> liɛ̱r</p>
+        <p><strong>Definition:</strong> A small, typically round container used for drinking.</p>
+    </div>
+    <div class="entry" data-en="book" data-am="መፅሐፍ = mǝṣḥäf" data-nr="bok">
+        <h2>book</h2>
+        <p><strong>Amharic:</strong> መፅሐፍ = mǝṣḥäf</p>
+        <p><strong>Nuer:</strong> bok</p>
+        <p><strong>Definition:</strong> A set of written or printed pages, usually bound with a protective cover.</p>
+    </div>
+    <div class="entry" data-en="water" data-am="ውሃ = wäha" data-nr="piw">
+        <h2>water</h2>
+        <p><strong>Amharic:</strong> ውሃ = wäha</p>
+        <p><strong>Nuer:</strong> piw</p>
+        <p><strong>Definition:</strong> A clear, colorless, odorless, and tasteless liquid essential for life.</p>
+    </div>
+    <div class="entry" data-en="food" data-am="ምግብ = mɨgɨb" data-nr="kuän">
+        <h2>food</h2>
+        <p><strong>Amharic:</strong> ምግብ = mɨgɨb</p>
+        <p><strong>Nuer:</strong>kuän</p>
+        <p><strong>Definition:</strong> Any nutritious substance that people or animals eat or drink.</p>
+    </div>
+    <div class="entry" data-en="friend" data-am="ጓደኛ = wädaǧ" data-nr="määth">
+        <h2>friend</h2>
+        <p><strong>Amharic:</strong> ጓደኛ = gädanya</p>
+        <p><strong>Nuer:</strong>määth</p>
+        <p><strong>Definition:</strong> A person whom one knows and with whom one has a bond of mutual affection.</p>
+    </div>
+    <div class="entry" data-en="house" data-am="ቤት = bet" data-nr="duel">
+        <h2>house</h2>
+        <p><strong>Amharic:</strong> ቤት = bet</p>
+        <p><strong>Nuer:</strong> duel</p>
+        <p><strong>Definition:</strong> A building for human habitation, especially one that is lived in by a family or small group of people.</p>
+    </div>
+    <div class="entry" data-en="school" data-am="ትምህርት ቤት = tɨmɨhɨrt bet" data-nr="duel gɔärä">
+        <h2>school</h2>
+        <p><strong>Amharic:</strong> ትምህርት ቤት = tɨmɨhɨrt bet</p>
+        <p><strong>Nuer:</strong> duel gɔärä</p>
+        <p><strong>Definition:</strong> An institution for educating children or a place for instruction.</p>
+    </div>
+    <div class="entry" data-en="family" data-am="ቤተሰብ = bät'äseb" data-nr="ji dhɔar">
+        <h2>family</h2>
+        <p><strong>Amharic:</strong> ቤተሰብ = bät'äseb</p>
+        <p><strong>Nuer:</strong> ji dhɔar</p>
+        <p><strong>Definition:</strong> A group consisting of parents and their children.</p>
+		</div>
+	<div class="entry" data-en="bad" data-am="መጥፎ = mətfo" data-nr="mi jiäk">
+    <h2>bad</h2>
+    <p><strong>Amharic:</strong> መጥፎ = mətfo</p>
+    <p><strong>Nuer:</strong> mi jiäk</p>
+    <p><strong>Definition:</strong> Not good or satisfactory.</p>
+</div>
+
+<div class="entry" data-en="bird" data-am="ወፍ = wef" data-nr="dit">
+    <h2>bird</h2>
+    <p><strong>Amharic:</strong> ወፍ = wef</p>
+    <p><strong>Nuer:</strong> dit</p>
+    <p><strong>Definition:</strong> A warm-blooded vertebrate characterized by feathers, wings, and a beak.</p>
+</div>
+
+<div class="entry" data-en="book" data-am="መጽሐፍ = meṣhafe" data-nr="bok">
+    <h2>book</h2>
+    <p><strong>Amharic:</strong> መጽሐፍ = meṣhafe</p>
+    <p><strong>Nuer:</strong> bok</p>
+    <p><strong>Definition:</strong> A set of written or printed sheets bound together.</p>
+</div>
+
+<div class="entry" data-en="brother" data-am="ወንድም = wəndəm" data-nr="dämaar">
+    <h2>brother</h2>
+    <p><strong>Amharic:</strong> ወንድም = wəndəm</p>
+    <p><strong>Nuer:</strong> dämaar</p>
+    <p><strong>Definition:</strong> A male sibling.</p>
+</div>
+
+
+<div class="entry" data-en="child" data-am="ልጅ = liʒ" data-nr="gat">
+    <h2>child</h2>
+    <p><strong>Amharic:</strong> ልጅ = liʒ</p>
+    <p><strong>Nuer:</strong> gat</p>
+    <p><strong>Definition:</strong> A young human being below the age of puberty.</p>
+</div>
+
+<div class="entry" data-en="drink" data-am="መጠጣት = meṭṭatat" data-nr="mäth">
+    <h2>drink</h2>
+    <p><strong>Amharic:</strong> መጠጣት = meṭṭatat</p>
+    <p><strong>Nuer:</strong> mäth</p>
+    <p><strong>Definition:</strong> To swallow liquid.</p>
+</div>
+
+<div class="entry" data-en="eat" data-am="መብላት = meblat" data-nr="miäth">
+    <h2>eat</h2>
+    <p><strong>Amharic:</strong> መብላት = meblat</p>
+    <p><strong>Nuer:</strong> miäth</p>
+    <p><strong>Definition:</strong> To take food into the mouth and swallow it.</p>
+</div>
+
+<div class="entry" data-en="father" data-am="አባት = abat" data-nr="bäbä">
+    <h2>father</h2>
+    <p><strong>Amharic:</strong> አባት = abat</p>
+    <p><strong>Nuer:</strong> bäbä</p>
+    <p><strong>Definition:</strong> A male parent.</p>
+</div>
+
+</div>
+<script>
+    const searchInput = document.getElementById('search');
+    const dictionary = document.getElementById('dictionary');
+    const entries = dictionary.getElementsByClassName('entry');
+
+    searchInput.addEventListener('input', function() {
+        const searchTerm = searchInput.value.toLowerCase();
+        Array.from(entries).forEach(entry => {
+            const enWord = entry.getAttribute('data-en').toLowerCase();
+            const amWord = entry.getAttribute('data-am').toLowerCase();
+            const nrWord = entry.getAttribute('data-nr').toLowerCase();
+
+            if (enWord.includes(searchTerm) || amWord.includes(searchTerm) || nrWord.includes(searchTerm)) {
+                entry.style.display = 'block';
+            } else {
+                entry.style.display = 'none';
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

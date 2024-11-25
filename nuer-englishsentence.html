@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentence Matching Game</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #a0d8ef, #e0f7fa);
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .sentence-container {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #333;
+            padding: 10px;
+            border: 2px solid #2196F3;
+            border-radius: 10px;
+            background-color: yellow;
+        }
+
+        .question-number {
+            font-size: 1.2em;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        .option-box {
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            background-color: #fff;
+            margin: 10px 0;
+            text-align: center;
+            font-size: 1.2em;
+            color: #555;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .option-box:hover {
+            background-color: #f9f9f9;
+            border-color: #2196F3;
+            transform: translateY(-2px);
+        }
+
+        .option-box.selected {
+            background-color: #e3f2fd;
+            border-color: #2196F3;
+        }
+
+        .option-box.correct {
+            background-color: #dfffd7;
+            border-color: #4CAF50;
+        }
+
+        .option-box.incorrect {
+            background-color: #ffe6e6;
+            border-color: #f44336;
+        }
+
+        .feedback {
+            text-align: center;
+            margin: 20px 0;
+            padding: 10px;
+            border-radius: 5px;
+            display: none;
+        }
+
+        .feedback.correct {
+            background-color: #dfffd7;
+            color: #4CAF50;
+        }
+
+        .feedback.incorrect {
+            background-color: #ffe6e6;
+            color: #f44336;
+        }
+
+        .controls {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 0 10px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+
+        .total-score {
+            text-align: center;
+            font-size: 1.5em;
+            color: #333;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .nav-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .nav-button {
+            display: inline-block;
+            text-decoration: none;
+            color: white;
+            background-color: #2196F3;
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin: 0 5px;
+            transition: background-color 0.3s, transform 0.3s;
+            font-size: 1.1em;
+        }
+
+        .nav-button:hover {
+            background-color: #1976D2;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="nav-container">
+       
+        <a href="index.html" class="nav-button">Back</a>
+     
+    </div>
+	<h5>Play Nuer-English Vocabulary Game </h5>
+    <div class="question-number" id="questionNumber">Question 1</div>
+    <div class="sentence-container" id="sentenceDisplay">Loading sentence...</div>
+    <div class="option-container" id="optionContainer"></div>
+    <div class="feedback" id="feedback"></div>
+    <div class="total-score" id="totalScoreDisplay">Total Score: 0 / 20</div>
+    <div class="controls">
+        <button onclick="checkAnswer()" id="checkButton" disabled>Check Answer</button>
+        <button onclick="nextRound()" id="nextButton" disabled>Next Round</button>
+        <button onclick="restartGame()" id="restartButton" style="display: none;">Restart Game</button>
+    </div>
+</div>
+
+<script>
+    const sentences = [
+        { en: "How are you today?", nr: "mal puony du ɛn walɛ?" },
+        { en: "I am going to the market", nr: "ɣän wä kä thuk" },
+        { en: "The weather is beautiful", nr: "jiɔm gɔa ɛ" },
+        { en: "Please come sit with me", nr: "bë̱r nyuri kɛ ɣä kɛɛl" },
+        { en: "What is your name?", nr: "cɔal ciöt du ïdi?" },
+        { en: "I am going to work", nr: "ɣän wä guäth lät" },
+        { en: "I am going to school", nr: "ɣän wä duel gɔärä" },
+        { en: "I am eating", nr: "ɣän miäthä" },
+        { en: "I am drinking", nr: "ɣän mäthä" },
+        { en: "I don't understand", nr: "känɛ cuop lɔcdä" },
+        { en: "How are you?", nr: "Mal puɔ̱nydu?" },
+        { en: "Thank you", nr: "Ci lɔcdä tɛɛth" },
+        { en: "What is your name?", nr: "Cɔal ciötdu idi?" },
+        { en: "Where are you from?", nr: "Bi wënith?" },
+        { en: "I love you", nr: "Nhɔa̱kä ji" },
+        { en: "I'm hungry", nr: "Ɣän näk buɔthä" },
+        { en: "See you later", nr: "Ban jëk ni wa̱lɛ" },
+        { en: "I'm tired", nr: "Ɣän cä cuuc" }
+    ];
+
+    let currentSentence;
+    let correctTranslation;
+    let selectedOption = null;
+    let score = 0;
+    let totalQuestions = 20;
+    let questionsAsked = 0;
+
+    function loadSentence() {
+        if (questionsAsked >= totalQuestions) {
+            endGame();
+            return;
+        }
+
+        const randomIndex = Math.floor(Math.random() * sentences.length);
+        currentSentence = sentences[randomIndex];
+
+        // Randomly choose a language to display (0 for English, 1 for Nuer)
+        const langChoice = Math.floor(Math.random() * 2);
+
+        let displayedSentence;
+        let distractors = [];
+
+        if (langChoice === 0) {
+            displayedSentence = currentSentence.en;
+            correctTranslation = currentSentence.nr;
+            distractors = getDistractors(currentSentence.nr, 'nr');
+        } else {
+            displayedSentence = currentSentence.nr;
+            correctTranslation = currentSentence.en;
+            distractors = getDistractors(currentSentence.en, 'en');
+        }
+
+        const options = [correctTranslation, ...distractors];
+        options.sort(() => Math.random() - 0.5);
+
+        document.getElementById('sentenceDisplay').textContent = displayedSentence;
+        document.getElementById('questionNumber').textContent = `Question ${questionsAsked + 1}`;
+
+        const optionContainer = document.getElementById('optionContainer');
+        optionContainer.innerHTML = '';
+
+        options.forEach(opt => {
+            const optionBox = document.createElement('div');
+            optionBox.className = 'option-box';
+            optionBox.textContent = opt;
+            optionBox.onclick = function() { selectOption(optionBox); };
+            optionContainer.appendChild(optionBox);
+        });
+
+        questionsAsked++;
+    }
+
+    function getDistractors(correctAnswer, lang) {
+        let distractors = [];
+        while (distractors.length < 3) {
+            const randomSentence = sentences[Math.floor(Math.random() * sentences.length)];
+            const distractor = lang === 'nr' ? randomSentence.nr : randomSentence.en;
+
+            if (distractor !== correctAnswer && !distractors.includes(distractor)) {
+                distractors.push(distractor);
+            }
+        }
+        return distractors;
+    }
+
+    function selectOption(box) {
+        if (box.classList.contains('correct') || box.classList.contains('incorrect')) return;
+
+        document.querySelectorAll('.option-box').forEach(b => {
+            b.classList.remove('selected');
+        });
+
+        box.classList.add('selected');
+        selectedOption = box;
+        document.getElementById('checkButton').disabled = false;
+    }
+
+    function checkAnswer() {
+        const feedback = document.getElementById('feedback');
+
+        if (selectedOption.textContent === correctTranslation) {
+            selectedOption.classList.add('correct');
+            feedback.textContent = "Correct match!";
+            feedback.className = "feedback correct";
+            score++;
+        } else {
+            selectedOption.classList.add('incorrect');
+            feedback.textContent = `Incorrect match. The correct answer is: ${correctTranslation}`;
+            feedback.className = "feedback incorrect";
+        }
+
+        feedback.style.display = 'block';
+        document.getElementById('checkButton').disabled = true;
+        document.getElementById('nextButton').disabled = false;
+    }
+
+    function nextRound() {
+        document.querySelectorAll('.option-box').forEach(box => {
+            box.classList.remove('selected', 'correct', 'incorrect');
+        });
+
+        document.getElementById('feedback').style.display = 'none';
+        document.getElementById('checkButton').disabled = true;
+        document.getElementById('nextButton').disabled = true;
+
+        loadSentence();
+    }
+
+    function endGame() {
+        const feedback = document.getElementById('feedback');
+        feedback.textContent = `Game Over!`;
+        feedback.className = "feedback";
+        feedback.style.display = 'block';
+
+        document.getElementById('nextButton').style.display = 'none';
+        document.getElementById('restartButton').style.display = 'inline-block';
+        document.getElementById('totalScoreDisplay').textContent = `Total Score: ${score} / ${totalQuestions}`;
+        document.getElementById('totalScoreDisplay').style.display = 'block';
+    }
+
+    function restartGame() {
+        score = 0;
+        questionsAsked = 0;
+        document.getElementById('totalScoreDisplay').style.display = 'none';
+        loadSentence();
+        document.getElementById('restartButton').style.display = 'none';
+    }
+
+    window.onload = loadSentence;
+</script>
+</body>
+</html>
